@@ -87,7 +87,13 @@ const Inbox = () => {
     };
 
     const handleNewMessages = (data) => {
-        setNewMessages((prev) => [...prev, data]);
+        setNewMessages((prev) => {
+            if (prev.find((message) => message._id === data._id)) {
+                return prev;
+            } else {
+                return [...prev, data];
+            }
+        });
     };
 
     const sendMessage = async (e) => {
