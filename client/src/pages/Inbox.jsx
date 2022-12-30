@@ -1,4 +1,4 @@
-import { useNavigate, useParams } from "react-router-dom";
+import { Link, useNavigate, useParams } from "react-router-dom";
 import moment from "moment";
 import { io } from "socket.io-client";
 import { fetchConversation, fetchConversations } from "../api/conversations";
@@ -16,7 +16,7 @@ const socket = io("http://localhost:5000", {
 
 const Inbox = () => {
     const { conversationId } = useParams();
-    const { userState } = useGetContext();
+    const { userState, userAction, authAction } = useGetContext();
     const navigate = useNavigate();
 
     useEffect(() => {
@@ -108,17 +108,22 @@ const Inbox = () => {
         }
     };
 
+    const handleLogout = () => {
+        authAction.unsetAuth();
+        userAction.unsetUser();
+    };
+
     return (
         <>
             <div className="menu">
                 <div className="menu-item">
-                    <a href="/inbox">Inbox</a>
+                    <Link href="/inbox">Inbox</Link>
                 </div>
-                <div className="menu-item">
+                {/* <div className="menu-item">
                     <a href="/users">Users</a>
-                </div>
-                <div className="menu-item">
-                    <a href="/">Login</a>
+                </div> */}
+                <div className="menu-item" onClick={handleLogout}>
+                    <a href="/login">logout</a>
                 </div>
             </div>
             <div id="chat-container">

@@ -6,11 +6,11 @@ import { Provider } from "./store/store";
 import "./style/index.css";
 
 ReactDOM.createRoot(document.getElementById("root")).render(
-    <>
+    <React.StrictMode>
         <Provider>
             <BrowserRouter>
                 <App />
             </BrowserRouter>
         </Provider>
-    </>
+    </React.StrictMode>
 );

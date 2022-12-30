@@ -1,10 +1,12 @@
 import { useRef } from "react";
+import { useNavigate } from "react-router-dom";
 import { login } from "../api/auth";
 import useGetContext from "../hooks/useGetContext";
 
 const Login = () => {
     const formRef = useRef(null);
     const { userAction, authAction } = useGetContext();
+    const navigate = useNavigate();
 
     const handleSubmit = async (e) => {
         e.preventDefault();
@@ -15,6 +17,7 @@ const Login = () => {
                 token: response.data.token,
             });
             authAction.setAuth(true);
+            navigate("/inbox");
         }
     };
     return (
